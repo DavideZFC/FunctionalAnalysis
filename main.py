@@ -1,17 +1,20 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from classes.function import function
+from functions.gramschmidt import gramschmidt
+from functions.plot_functions import plot_functions
 
-f = lambda x: x**2
-g = lambda x: x**0
+
 N = 100
-fun = function(N)
-fun.forma(f)
-gun = function(N)
-gun.forma(f)
+d = 5
 
-kkk = fun.project(gun)
+finp = []
+for i in range(d):
+    fun = function(N)
+    f = lambda x: x**i
+    fun.forma(f)
+    finp.append(fun)
 
-plt.plot(kkk.x, kkk.y)
-plt.show()
+fout = gramschmidt(finp)
+plot_functions(fout)
 

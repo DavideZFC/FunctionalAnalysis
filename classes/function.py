@@ -36,7 +36,11 @@ class function:
     def project(self, other):
         # self è la functione che si proietta, other quella su cui si proietta
         scal = (self*other)/(other*other)
-        return self + other.multiply(-scal)
+        return other.multiply(scal)
+    
+    def residual(self, other):
+        # residual of the projection of self over other
+        return self + self.project(other).multiply(-1)       
         
         
     
