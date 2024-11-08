@@ -1,9 +1,5 @@
 import numpy as np
-
-def gram_schmidt(A):
-    # Perform QR decomposition on A
-    Q, R = np.linalg.qr(A)
-    return Q
+from functions.gram_schmidt import gram_schmidt
 
 def random_orthogonal_basis(k, attack=False):
     """

@@ -15,10 +15,12 @@ p = poussin_method(mat, basis)
 
 
 k = 200
+d = 30
 mat = bad_proj_matrix(k)
 print(inf(mat))
-basis = good_basis(k)
+basis = good_basis(k,d)
 
 p = poussin_method(mat, basis)
-p.optimizer()
+p.optimizer(iter=40)
 p.plot_result()
+print(np.sum(np.abs(basis)))

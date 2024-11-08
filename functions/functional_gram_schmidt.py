@@ -1,6 +1,6 @@
 from copy import deepcopy
 
-def gramschmidt(finp):
+def functional_gram_schmidt(finp):
     '''
     receives a list of functions
     '''

@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from classes.function import function
-from functions.gramschmidt import gramschmidt
+from functions.functional_gram_schmidt import functional_gram_schmidt
 from functions.plot_functions import plot_functions
 
 
@@ -15,6 +15,6 @@ for i in range(d):
     fun.forma(f)
     finp.append(fun)
 
-fout = gramschmidt(finp)
+fout = functional_gram_schmidt(finp)
 plot_functions(fout)
 
