@@ -51,8 +51,8 @@ class poussin_method:
         return load
     
 
-    def optimizer(self, iter=100, G=1, R=1):
-
+    def optimizer(self, iter=100, G=1, R=1, exp=0.75):
+        # exp must be in (0.5,1] to have theory
         # contain the sequence of values for the objecive function
         self.vals = np.zeros(iter)
 
@@ -67,7 +67,7 @@ class poussin_method:
             for j in range(self.nbasis):
                 grad[j] = self.get_gradient(m, j)
 
-            lr = R/(G*(it+1)**0.5)
+            lr = R/(G*(it+1)**exp)
 
             self.coef = self.coef - lr*grad
         
