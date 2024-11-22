@@ -1,39 +1,36 @@
 from classes.poussin_method import poussin_method
 from functions.bad_proj_matrix import bad_proj_matrix
 from functions.good_basis import good_basis
+from functions.polynomials import *
 from functions.inf import inf
 import numpy as np
 import matplotlib.pyplot as plt
 
-'''
-mat = np.eye(k)
-mat[0,0] = 0
-basis = np.zeros((k,2))
-basis[0] = 1
-
-p = poussin_method(mat, basis)
-'''
+title = 'exp_LEGENDRE_500_5_10_15'
 plt.figure(figsize=(6, 4))
 plt.xlabel("Iterations")
 plt.ylabel("Infinity norm")
 plt.grid(True)
 
-D = [10, 20, 30, 50]
+D = [5, 10, 15]
 
-k = 200
-mat = bad_proj_matrix(k)
+k = 500
+# mat = bad_proj_matrix(k)
+dd = 10
+mat = legendre_projector(k, d0=0,d=dd)
 
 for d in D:
-    basis = good_basis(k,d)
+    # basis = good_basis(k,d)
+    basis =  legendre_polynomials(k, d0=dd, d=dd+d)
 
     G = d
     R = 1
 
     p = poussin_method(mat, basis)
-    p.optimizer(iter=40, G=G, R=R)
+    p.optimizer(iter=200, G=G, R=R)
     # p.plot_result()
 
     plt.plot(p.vals, label='D = {}'.format(d))
 plt.legend()
-plt.savefig('results/multiplot.pdf')
+plt.savefig('results/{}.pdf'.format(title))
 plt.show()

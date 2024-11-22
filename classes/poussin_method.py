@@ -61,7 +61,8 @@ class poussin_method:
             M = self.get_curr_M()
             value, m = inf(M)
             self.vals[it] = value
-            print('current objective: '+str(value))
+            if it % 100 == 1:
+                print('current objective: '+str(value))
 
             grad = np.zeros(self.nbasis)
             for j in range(self.nbasis):

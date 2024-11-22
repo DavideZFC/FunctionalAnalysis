@@ -1,5 +1,6 @@
 import numpy as np
 
+
 def bad_proj_matrix(k):
     bad_vector = np.ones(k)
     bad_vector[0] = k**0.5
