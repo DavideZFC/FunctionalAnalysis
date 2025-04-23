@@ -51,7 +51,7 @@ class poussin_method:
         return load
     
 
-    def optimizer(self, iter=100, G=1, R=1, exp=0.75):
+    def optimizer(self, iter=100, G=1, R=1, exp=0.60):
         # exp must be in (0.5,1] to have theory
         # contain the sequence of values for the objecive function
         self.vals = np.zeros(iter)

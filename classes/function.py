@@ -1,9 +1,12 @@
 import numpy as np
 
 class function:
-    def __init__(self, N, a=0, b=1):
+    def __init__(self, N, a=0, b=1, x=None):
         self.N = N
-        self.x = np.linspace(a,b,N)
+        if x is not None:
+            self.x = x
+        else:
+            self.x = np.linspace(a,b,N)
 
     def forma(self, f):
         self.y = f(self.x)
@@ -21,12 +24,12 @@ class function:
         self.y = self.y/self.norm2()
     
     def __add__(self, other):
-        new_f = function(self.N)
+        new_f = function(self.N, x=self.x)
         new_f.y = self.y + other.y
         return new_f
     
     def multiply(self, c):
-        new_f = function(self.N)
+        new_f = function(self.N, x=self.x)
         new_f.y = c*self.y
         return new_f
     

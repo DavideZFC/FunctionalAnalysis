@@ -6,15 +6,15 @@ from functions.inf import inf
 import numpy as np
 import matplotlib.pyplot as plt
 
-title = 'exp_LEGENDRE_500_5_10_15'
+title = 'exp_LEGENDRE_500_5_10_20_40_exp60'
 plt.figure(figsize=(6, 4))
 plt.xlabel("Iterations")
 plt.ylabel("Infinity norm")
 plt.grid(True)
 
-D = [5, 10, 15]
+D = [5, 10, 20, 40]
 
-k = 500
+k = 200
 # mat = bad_proj_matrix(k)
 dd = 10
 mat = legendre_projector(k, d0=0,d=dd)
@@ -27,7 +27,7 @@ for d in D:
     R = 1
 
     p = poussin_method(mat, basis)
-    p.optimizer(iter=200, G=G, R=R)
+    p.optimizer(iter=1000, G=G, R=R)
     # p.plot_result()
 
     plt.plot(p.vals, label='D = {}'.format(d))
