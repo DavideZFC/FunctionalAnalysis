@@ -79,7 +79,7 @@ num_d = 5
 num_k = 10
 ds = np.logspace(start=4, stop=7, num=num_d, base=2).astype(int)
 ks = 10*np.logspace(start=7, stop=13, num=num_k, base=2).astype(int)
-
+'''
 result = np.zeros((num_d,num_k))
 
 for i in range(len(ds)):
@@ -104,6 +104,40 @@ for i in range(len(ds)):
 # plt.xscale('log')
 plt.legend()
 plt.savefig('results/Lebesgue.png')
+plt.xlabel('k')
+plt.ylabel('Lebesgue constant')
+plt.show()
+'''
+
+result = np.zeros((num_d,num_k))
+
+for i in range(len(ds)):
+    for j in range(len(ks)):
+
+        k = ks[j]
+        d = ds[i]
+        d_regul = int(d*1.2)
+
+        x = np.linspace(-1, 1, k)
+        polys = evaluate_polynomials(d_regul, x)
+        orthogonal_polys = -(k/2)**(1/2)*gram_schmidt(polys.T).T
+
+        # plot_sequence_of_functions(orthogonal_polys, x)
+        regul_identiy_matrix = np.eye(d_regul)
+        for m in range(d_regul):
+            if m > d:
+                regul_identiy_matrix[m,m] = 1-(m-d)/d
+
+        k_max = d_regul
+        projection_matrix = (2/k)*orthogonal_polys.T[:k_max,:] @ regul_identiy_matrix @ orthogonal_polys
+        matinf, _ = inf(projection_matrix)
+
+        result[i,j] = matinf
+
+    plt.plot(ks, result[i], marker='o', linestyle='dashed', linewidth=1.5, markersize=5, label='d = {}'.format(ds[i]))
+# plt.xscale('log')
+plt.legend()
+plt.savefig('results/Regul_Lebesgue.png')
 plt.xlabel('k')
 plt.ylabel('Lebesgue constant')
 plt.show()
